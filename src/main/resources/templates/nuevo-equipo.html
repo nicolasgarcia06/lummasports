@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo equipo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+
+        form {
+            max-width: 500px;
+        }
+
+        .campo {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 4px;
+        }
+
+        .error-box {
+            color: white;
+            background: crimson;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+        }
+
+        .acciones {
+            margin-top: 20px;
+        }
+
+        .acciones a {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Nuevo equipo</h1>
+
+<div th:if="${errorNegocio}" class="error-box" th:text="${errorNegocio}"></div>
+
+<form th:action="@{/equipos/guardar}" th:object="${equipo}" method="post">
+
+    <div class="campo">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" th:field="*{nombre}">
+        <div class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+    </div>
+
+    <div class="campo">
+        <label for="juego">Juego</label>
+        <input type="text" id="juego" th:field="*{juego}">
+        <div class="error" th:if="${#fields.hasErrors('juego')}" th:errors="*{juego}"></div>
+    </div>
+
+    <div class="campo">
+        <label for="pais">País</label>
+        <input type="text" id="pais" th:field="*{pais}">
+        <div class="error" th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}"></div>
+    </div>
+
+    <div class="acciones">
+        <button type="submit">Guardar</button>
+        <a th:href="@{/equipos}">Volver</a>
+    </div>
+
+</form>
+
+</body>
+</html>

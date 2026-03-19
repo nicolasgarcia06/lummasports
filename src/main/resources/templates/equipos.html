@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Equipos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .error-box {
+            color: white;
+            background: crimson;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+        }
+
+        .acciones-superiores {
+            margin-bottom: 20px;
+        }
+
+        .acciones-superiores a {
+            margin-right: 10px;
+            text-decoration: none;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #999;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .acciones a {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Equipos eSports</h1>
+
+<div th:if="${errorListado}" class="error-box" th:text="${errorListado}"></div>
+
+<div class="acciones-superiores">
+    <a th:href="@{/equipos/nuevo}">Nuevo equipo</a>
+    <a th:href="@{/torneos}">Ver torneos</a>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Juego</th>
+        <th>País</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="equipo : ${equipos}">
+        <td th:text="${equipo.id}"></td>
+        <td th:text="${equipo.nombre}"></td>
+        <td th:text="${equipo.juego}"></td>
+        <td th:text="${equipo.pais}"></td>
+        <td class="acciones">
+            <a th:href="@{/equipos/editar/{id}(id=${equipo.id})}">Editar</a>
+            <a th:href="@{/equipos/borrar/{id}(id=${equipo.id})}">Borrar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

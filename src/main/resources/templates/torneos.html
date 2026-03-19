@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Torneos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .acciones-superiores {
+            margin-bottom: 20px;
+        }
+
+        .acciones-superiores a {
+            margin-right: 10px;
+            text-decoration: none;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #999;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .acciones a {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Torneos eSports</h1>
+
+<div class="acciones-superiores">
+    <a th:href="@{/torneos/nuevo}">Nuevo torneo</a>
+    <a th:href="@{/equipos}">Ver equipos</a>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Torneo</th>
+        <th>Ciudad</th>
+        <th>Premio</th>
+        <th>Equipo campeón</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="torneo : ${torneos}">
+        <td th:text="${torneo.id}"></td>
+        <td th:text="${torneo.nombreTorneo}"></td>
+        <td th:text="${torneo.ciudad}"></td>
+        <td th:text="${torneo.premio}"></td>
+        <td th:text="${torneo.nombreEquipo}"></td>
+        <td class="acciones">
+            <a th:href="@{/torneos/editar/{id}(id=${torneo.id})}">Editar</a>
+            <a th:href="@{/torneos/borrar/{id}(id=${torneo.id})}">Borrar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
