@@ -1,9 +1,30 @@
 services:
   postgres:
-    image: 'postgres:latest'
+    image: postgres:17
+    container_name: arena-postgres
     environment:
-      - 'POSTGRES_DB=mydatabase'
-      - 'POSTGRES_PASSWORD=secret'
-      - 'POSTGRES_USER=myuser'
+      POSTGRES_DB: arenaesports
+      POSTGRES_USER: dam
+      POSTGRES_PASSWORD: dam1234
     ports:
-      - '5432'
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    profiles: ["app"]
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: arena-app
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/arenaesports
+      SPRING_DATASOURCE_USERNAME: dam
+      SPRING_DATASOURCE_PASSWORD: dam1234
+
+volumes:
+  postgres_data:
