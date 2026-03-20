@@ -9,14 +9,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import service.EquipoService;
-import service.TorneoService;
+import service.TorneoServiceImpl;
 
 @Controller
 @RequestMapping("/torneos")
 @RequiredArgsConstructor
 public class TorneoController {
 
-    private final TorneoService torneoService;
+    private final TorneoServiceImpl torneoService;
     private final EquipoService equipoService;
 
     @GetMapping
